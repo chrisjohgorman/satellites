@@ -1,0 +1,4 @@
+# satellite helper apps written in python
+These files are helper apps to determine when a satellite pass is going to occur.  They should be used in the following order.  update_tle.sh, pass_times.py, plot_alt_az.py and finally tle_to_doppler_file.py.  The first program update_tle.sh runs without arguments and populates a directory $HOME/doppler with three line elements from celestrak.  pass_times.py takes a date range in utc, along with one of the tle files and your latitude and longitude to determine when the satellite corresponding to the tle file passes your location.  The next file plot_alt_az.py takes data from the output of pass_times.py and plots the satellite pass.  The final file tle_to_doppler_file.py uses output from pass_times.py to compute the doppler shift for the satellite for the doppler correction block from gr_satellites.
+
+
