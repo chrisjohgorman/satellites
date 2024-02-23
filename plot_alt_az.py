@@ -65,7 +65,7 @@ def main():
     plt.rcParams['figure.figsize'] = 7, 7
     
     if(args.utc):
-        tz = timezone('Africa/Abidjan')
+        tz = timezone('GMT')
     else: 
         tz = timezone('Canada/Eastern')
 
