@@ -49,9 +49,9 @@ def plot_sky(pass_indices, t, tz, az, alt):
     # Draw line and labels.
     θ = az.radians
     r = 90 - alt.degrees
-    ax.plot(θ[i:j], r[i:j], 'ro--')
-    for k in range(i, j):
-        text = t[k].astimezone(tz).strftime('%H:%M')
+    ax.plot(θ[i:j+1], r[i:j+1], 'ro--')
+    for k in range(i, j+1):
+        text = t[k].astimezone(tz).strftime('%H:%M:%S')
         ax.text(θ[k], r[k], text, ha='right', va='bottom')
 
 
@@ -69,21 +69,18 @@ def main():
     else: 
         tz = timezone('Canada/Eastern')
 
-    seconds = range(0,int(args.length_pass),90)
-    time = datetime.datetime.utcfromtimestamp(float(args.start_timestamp))
+    time0 = datetime.datetime.utcfromtimestamp(float(args.start_timestamp))
+    time1 = datetime.datetime.utcfromtimestamp(float(args.start_timestamp)) + datetime.timedelta(0, int(args.length_pass))
     ts = load.timescale()
-    t = ts.utc(time.year, time.month, time.day, time.hour, time.minute, seconds)
-
+    t0 = ts.utc(time0.year, time0.month, time0.day, time0.hour, time0.minute, time0.second)
+    t1 = ts.utc(time1.year, time1.month, time1.day, time1.hour, time1.minute, time1.second)
+    t = ts.linspace(t0, t1, (int(args.length_pass) // 90))
     satellite = EarthSatellite(lines[1], lines[2], 'satellite', ts)
     groundstation = wgs84.latlon(args.lat, args.lon, args.alt)
     orbit = (satellite - groundstation).at(t)
     alt, az, distance = orbit.altaz()
 
-    above_horizon = alt.degrees > 0
-
-    indicies, = above_horizon.nonzero()
-
-    plot_sky([indicies[0], indicies[-1]], t, tz, az, alt)
+    plot_sky([0, len(t) -1], t, tz, az, alt)
 
     plt.show()
 
