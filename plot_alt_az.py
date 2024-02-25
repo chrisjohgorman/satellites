@@ -39,7 +39,8 @@ def plot_sky(pass_indices, t, tz, az, alt):
     i, j = pass_indices
     print('Rises:', t[i].astimezone(tz))
     print('Sets:', t[j].astimezone(tz))
-
+    print('Angle of midpoint:', (az.degrees[0] + az.degrees[-1]) / 2, '\u00b0')
+    
     # Set up the polar plot.
     ax = plt.subplot(111, projection='polar')
     ax.set_rlim([0, 90])
