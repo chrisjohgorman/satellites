@@ -58,8 +58,19 @@ def main():
         tz = timezone('Canada/Eastern')
 
     satellite = EarthSatellite(lines[1], lines[2], 'satellite', ts)
-
     t, events = satellite.find_events(groundstation, t0, t1, altitude_degrees=0.0)
+
+    # events must start at 0.  Reduce the array size in the event of it 
+    # starting at 2 or 1.  The event loop requires that the event start at 
+    # 0.
+    if events[0] == 2:
+        events = events[1:]
+        t = t[1:]
+
+    if events[0] == 1:
+        events = events[2:]
+        t = t[2:]
+
     for ti, event in zip(t, events):
         if event == 0:
             dt0 = ti.astimezone(tz)
@@ -70,7 +81,6 @@ def main():
             dt1 = ti.astimezone(tz)
             dt3 = dt1 - dt0
             dt4 = dt2 + dt3
-            #print(dt2.strftime('%Y %b %d %H:%M:%S'), dt2.timestamp(), "\t" ,dt3.seconds, "\t", dt4.strftime('%Y %b %d %H:%M:%S'))
             print(dt2.strftime('%Y %b %d %H:%M:%S'), dt4.strftime('%Y %b %d %H:%M:%S'), dt2.timestamp(), "\t" ,dt3.seconds)
 
 
