@@ -10,7 +10,7 @@ from pytz import timezone
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description='Generates a graph of Satellite altitude and azimuth' )
+        description='Generates a graph of Satellite pass on a polar plot' )
     parser.add_argument(
         '--tle-file', required=True,
         help='Input TLE file')
