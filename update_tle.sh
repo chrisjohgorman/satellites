@@ -10,4 +10,4 @@ wget -O ~/doppler/noaa_18.tle -q https://celestrak.org/NORAD/elements/gp.php?CAT
 wget -O ~/doppler/noaa_19.tle -q https://celestrak.org/NORAD/elements/gp.php?CATNR=33591
 wget -O ~/doppler/meteor_m2_3.tle -q https://celestrak.org/NORAD/elements/gp.php?CATNR=57166
 wget -O ~/doppler/ao_73.tle -q https://celestrak.org/NORAD/elements/gp.php?CATNR=39444
-wget -O ~/doppler/by02.tle -q https://celestrak.org/NORAD/elements/gp.php?CATNR=45857
+wget -O ~/doppler/by02_2.tle -q https://celestrak.org/NORAD/elements/gp.php?CATNR=45857
