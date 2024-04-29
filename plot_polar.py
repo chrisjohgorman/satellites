@@ -67,8 +67,8 @@ def main():
     else: 
         tz = timezone('Canada/Eastern')
 
-    time0 = datetime.datetime.utcfromtimestamp(float(args.start_timestamp))
-    time1 = datetime.datetime.utcfromtimestamp(float(args.start_timestamp)) + datetime.timedelta(0, int(args.length_pass))
+    time0 = datetime.datetime.fromtimestamp(float(args.start_timestamp), datetime.UTC)
+    time1 = datetime.datetime.fromtimestamp(float(args.start_timestamp), datetime.UTC) + datetime.timedelta(0, int(args.length_pass))
     ts = load.timescale()
     t0 = ts.utc(time0.year, time0.month, time0.day, time0.hour, time0.minute, time0.second)
     t1 = ts.utc(time1.year, time1.month, time1.day, time1.hour, time1.minute, time1.second)
